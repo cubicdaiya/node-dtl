@@ -1,4 +1,4 @@
-
+import Options
 import os
 
 srcdir  = '.'
@@ -20,3 +20,10 @@ def build(bld):
   obj.includes = [dtldir + '/dtl']
   obj.cxxflags = ['-O2']
  
+def shutdown():
+  if Options.commands['clean']:
+    if os.path.lexists('dtl.node'): 
+      os.unlink('dtl.node')
+  else:
+    if os.path.exists('build/default/dtl.node') and not os.path.lexists('dtl.node'):
+      os.symlink('build/default/dtl.node', 'dtl.node')
