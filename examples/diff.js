@@ -1,4 +1,4 @@
-var dtl = require('./dtl')
+var dtl = require('dtl')
 
 var a    = null;
 var b    = null;
