@@ -5,6 +5,6 @@
   "scripts": { "preinstall": "node-waf configure build" },
   "main": "./dtl",
   "keywords": [ "diff", "diff3", "editdistance", "unified format" ],
-  "licenses": [ { "type": "BSD", "url": "http://github.com/cubicdaiya/node-dtl/raw/master/LICENSE" } ],
-  "repository": { "type": "git", "url": "http://github.com/cubicdaiya/node-dtl.git" }
+  "licenses": [ { "type": "BSD", "url": "https://github.com/cubicdaiya/node-dtl/raw/master/LICENSE" } ],
+  "repository": { "type": "git", "url": "https://github.com/cubicdaiya/node-dtl.git" }
 }
