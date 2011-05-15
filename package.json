@@ -1,0 +1,10 @@
+{ "name": "dtl",
+  "version": "0.0.1",
+  "author": "Tatsuhiko Kubo <cubicdaiya@gmail.com>",
+  "description": "An dtl binding for node.js",
+  "scripts": { "preinstall": "node-waf configure build" },
+  "main": "./dtl",
+  "keywords": [ "diff", "diff3", "editdistance", "unified format" ],
+  "licenses": [ { "type": "BSD", "url": "http://github.com/cubicdaiya/node-dtl/raw/master/LICENSE" } ],
+  "repository": { "type": "git", "url": "http://github.com/cubicdaiya/node-dtl.git" }
+}
