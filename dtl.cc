@@ -3,7 +3,7 @@
 
 #include "dtl.h"
 #include "Dtl.h"
-//#include "Dtl3.h"
+#include "Dtl3.h"
 
 extern "C" void
 init (Handle<Object> target)
@@ -20,13 +20,17 @@ init (Handle<Object> target)
     NODE_SET_PROTOTYPE_METHOD(t_diff, "printUnifiedFormat",  Dtl::PrintUnifiedFormat);
 
     target->Set(String::New("Diff"), t_diff->GetFunction());
-    /*
+
     Local<FunctionTemplate> t_diff3 = FunctionTemplate::New(Dtl3::New);
     t_diff3->InstanceTemplate()->SetInternalFieldCount(1);
     t_diff3->SetClassName(String::NewSymbol("dtl3"));
 
+    NODE_SET_PROTOTYPE_METHOD(t_diff3, "compose",        Dtl3::Compose);
+    NODE_SET_PROTOTYPE_METHOD(t_diff3, "merge",          Dtl3::Merge);
+    NODE_SET_PROTOTYPE_METHOD(t_diff3, "mergedsequence", Dtl3::MergedSequence);
+
     target->Set(String::New("Diff3"), t_diff3->GetFunction());
-    */
+
 }
 
 NODE_MODULE(dtl, init);
