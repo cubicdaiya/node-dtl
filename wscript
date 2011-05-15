@@ -16,7 +16,7 @@ def configure(conf):
 def build(bld):
   obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
   obj.target   = 'dtl'
-  obj.source   = 'dtl.cc'
+  obj.source   = ['dtl.cc', 'Dtl.cc'] #, 'Dtl3.cc']
   obj.includes = [dtldir + '/dtl']
   obj.cxxflags = ['-O2']
  
