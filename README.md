@@ -10,4 +10,4 @@ License
 
 Please read the COPYING or following URL about the license of dtl.
 
-https://github.com/cubicdaiya/node-dtl/raw/master/LICENSE
+https://github.com/cubicdaiya/node-dtl/raw/master/COPYING
