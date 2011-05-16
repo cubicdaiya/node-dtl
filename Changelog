@@ -1,3 +1,11 @@
+2011-05-17 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* fixed bug of intdiff and strarrdiff
+
+	* add example programs
+
+	* 0.02 released.
+
 2011-05-15 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
-        * 0.01 released.
+	* 0.01 released.
