@@ -89,6 +89,31 @@ Handle<Value> Dtl::Editdistance(const Arguments& args)
     return scope.Close(Integer::New(ed));
 }
 
+Handle<Value> Dtl::Lcs(const Arguments& args)
+{
+    HandleScope scope;
+    Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
+    if (dtl->getType() == DtlTypeStringArray) {
+        vector<string> lcs_v = dtl->vsdiff->getLcsVec();
+        Local<Array> ret = Array::New(lcs_v.size());
+        for (size_t i=0;i<lcs_v.size();++i) {
+            ret->Set(Integer::New(i), String::New(lcs_v[i].c_str()));
+        }
+        return scope.Close(ret);
+    } else if (dtl->getType() == DtlTypeIntArray) {
+        vector<int> lcs_v = dtl->vidiff->getLcsVec();
+        Local<Array> ret = Array::New(lcs_v.size());
+        for (size_t i=0;i<lcs_v.size();++i) {
+            ret->Set(Integer::New(i), Integer::New(lcs_v[i]));
+        }
+        return scope.Close(ret);
+    } else {
+        vector<char> lcs_v = dtl->sdiff->getLcsVec();
+        string lcs_s(lcs_v.begin(), lcs_v.end());
+        return scope.Close(String::New(lcs_s.c_str()));
+    }
+}
+
 Handle<Value> Dtl::PrintSes(const Arguments& args)
 {
     HandleScope scope;

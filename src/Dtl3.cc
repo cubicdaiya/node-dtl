@@ -137,8 +137,6 @@ void Dtl3::run(enum op_t op)
             sdiff3->compose();
         }
         break;
-    case DtlOperandMerge:
-        break;
     case DtlOperandMergedSequence:
         if (getType() == DtlTypeStringArray) {
             vsdiff3->getMergedSequence();

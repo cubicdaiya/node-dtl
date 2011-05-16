@@ -38,6 +38,7 @@ public:
     static Handle<Value> Compose(const Arguments& args);
     static Handle<Value> ComposeUnifiedHunks(const Arguments& args);
     static Handle<Value> Editdistance(const Arguments& args);
+    static Handle<Value> Lcs(const Arguments& args);
     static Handle<Value> PrintSes(const Arguments& args);
     static Handle<Value> PrintUnifiedFormat(const Arguments& args);
     void setType(enum arg_type_t type);
@@ -45,9 +46,9 @@ public:
     void run(enum op_t);
 private:
     enum arg_type_t type;
-    dtl::Diff<char,    string>          *sdiff;
-    dtl::Diff<string,  strVec >         *vsdiff;
-    dtl::Diff<int,     intVec >         *vidiff;
+    dtl::Diff<char,    string>  *sdiff;
+    dtl::Diff<string,  strVec > *vsdiff;
+    dtl::Diff<int,     intVec > *vidiff;
 };
 
 #endif // NODE_DTL_CLASS_H

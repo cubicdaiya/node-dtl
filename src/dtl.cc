@@ -16,6 +16,7 @@ init (Handle<Object> target)
     NODE_SET_PROTOTYPE_METHOD(t_diff, "compose",             Dtl::Compose);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "composeUnifiedHunks", Dtl::ComposeUnifiedHunks);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "editdistance",        Dtl::Editdistance);
+    NODE_SET_PROTOTYPE_METHOD(t_diff, "lcs",                 Dtl::Lcs);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "printSES",            Dtl::PrintSes);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "printUnifiedFormat",  Dtl::PrintUnifiedFormat);
 
