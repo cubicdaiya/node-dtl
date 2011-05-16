@@ -1,7 +1,7 @@
 { "name"       : "dtl",
   "version"    : "0.0.2",
   "author"     : "Tatsuhiko Kubo <cubicdaiya@gmail.com>",
-  "description": "An dtl binding for node.js",
+  "description": "A dtl binding for node.js",
   "scripts"    : { "preinstall": "node-waf configure build" },
   "main"       : "./dtl",
   "keywords"   : [ "diff", "diff3", "editdistance", "unified format" ],
