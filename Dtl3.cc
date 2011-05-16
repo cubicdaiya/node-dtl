@@ -41,7 +41,7 @@ Handle<Value> Dtl3::New(const Arguments& args)
             for (int i=0;i<a1->Length();++i) {
                 seq1.push_back(a1->Get(Integer::New(i))->Int32Value());
             }
-            for (int i=0;i<a1->Length();++i) {
+            for (int i=0;i<a2->Length();++i) {
                 seq2.push_back(a2->Get(Integer::New(i))->Int32Value());
             }
             Dtl3 *dtl3 = new Dtl3(seq0, seq1, seq2);
@@ -56,7 +56,7 @@ Handle<Value> Dtl3::New(const Arguments& args)
             for (int i=0;i<a1->Length();++i) {
                 seq1.push_back(string(*String::Utf8Value(a1->Get(Integer::New(i))->ToString())));
             }
-            for (int i=0;i<a1->Length();++i) {
+            for (int i=0;i<a2->Length();++i) {
                 seq2.push_back(string(*String::Utf8Value(a2->Get(Integer::New(i))->ToString())));
             }
             Dtl3 *dtl3 = new Dtl3(seq0, seq1, seq2);
@@ -99,16 +99,14 @@ Handle<Value> Dtl3::MergedSequence(const Arguments& args)
         vector<string> seq = dtl3->vsdiff3->getMergedSequence();
         Local<Array> ret = Array::New(seq.size());
         for (int i=0;i<seq.size();++i) {
-            Local<Object> obj = Object::New();
-            ret->Set(String::New(seq[i].c_str()), obj);
+            ret->Set(Integer::New(i), String::New(seq[i].c_str()));
         }
         return scope.Close(ret);
     } else if (dtl3->getType() == DtlTypeIntArray) {
         vector<int> seq = dtl3->vidiff3->getMergedSequence();
         Local<Array> ret = Array::New(seq.size());
         for (int i=0;i<seq.size();++i) {
-            Local<Object> obj = Object::New();
-            ret->Set(Integer::New(seq[i]), obj);
+            ret->Set(Integer::New(i), Integer::New(seq[i]));
         }
         return scope.Close(ret);
     } else {
