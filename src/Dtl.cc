@@ -31,10 +31,10 @@ Handle<Value> Dtl::New(const Arguments& args)
 
         if (val->IsInt32()) {
             vector<int> seq0, seq1;
-            for (int i=0;i<a0->Length();++i) {
+            for (size_t i=0;i<a0->Length();++i) {
                 seq0.push_back(a0->Get(Integer::New(i))->Int32Value());
             }
-            for (int i=0;i<a1->Length();++i) {
+            for (size_t i=0;i<a1->Length();++i) {
                 seq1.push_back(a1->Get(Integer::New(i))->Int32Value());
             }
             Dtl *dtl = new Dtl(seq0, seq1);
@@ -43,10 +43,10 @@ Handle<Value> Dtl::New(const Arguments& args)
             return args.This();
         } else {
             vector<string> seq0, seq1;
-            for (int i=0;i<a0->Length();++i) {
+            for (size_t i=0;i<a0->Length();++i) {
                 seq0.push_back(string(*String::Utf8Value(a0->Get(Integer::New(i))->ToString())));
             }
-            for (int i=0;i<a1->Length();++i) {
+            for (size_t i=0;i<a1->Length();++i) {
                 seq1.push_back(string(*String::Utf8Value(a1->Get(Integer::New(i))->ToString())));
             }
             Dtl *dtl = new Dtl(seq0, seq1);

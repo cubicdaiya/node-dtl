@@ -4,7 +4,7 @@ import os
 srcdir  = '.'
 blddir  = 'build'
 dtldir  = os.path.abspath(srcdir) + "/deps/dtl"
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 
 def set_options(opt):
   opt.tool_options('compiler_cxx')
@@ -16,9 +16,9 @@ def configure(conf):
 def build(bld):
   obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
   obj.target   = 'dtl'
-  obj.source   = ['dtl.cc', 'Dtl.cc', 'Dtl3.cc']
+  obj.source   = bld.glob('src/*.cc')
   obj.includes = [dtldir + '/dtl']
-  obj.cxxflags = ['-O2']
+  obj.cxxflags = ['-O2', '-g', '-Wall']
  
 def shutdown():
   if Options.commands['clean']:
