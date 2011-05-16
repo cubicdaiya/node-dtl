@@ -1,6 +1,14 @@
 2011-05-17 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
-	* fixed bug of intdiff and strarrdiff
+	* move source files to src directory
+
+	* fixes potential risk(size of 'int' and size of 'size_t')
+
+	* 0.03 released.
+
+2011-05-17 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* fixes bug of intdiff and strarrdiff
 
 	* add example programs
 
