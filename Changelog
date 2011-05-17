@@ -1,10 +1,16 @@
+2011-05-18 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* add function lcs and ses
+
+	* 0.0.4 released.
+
 2011-05-17 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
 	* move source files to src directory
 
 	* fixes potential risk(size of 'int' and size of 'size_t')
 
-	* 0.03 released.
+	* 0.0.3 released.
 
 2011-05-17 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
@@ -12,8 +18,8 @@
 
 	* add example programs
 
-	* 0.02 released.
+	* 0.0.2 released.
 
 2011-05-15 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
-	* 0.01 released.
+	* 0.0.1 released.
