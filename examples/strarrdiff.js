@@ -7,7 +7,11 @@ var diff = new dtl.Diff(a, b);
 diff.compose();
 console.log("editdistance:" + diff.editdistance());
 console.log("lcs:" + diff.lcs());
-diff.printSES();
+var marks = {'add'    : '+',
+             'del'    : '-',
+             'common' : ' '};
+console.log("ses:");
+console.log(diff.ses(marks));
 console.log("Unified Diff:");
 diff.composeUnifiedHunks();
 diff.printUnifiedFormat();
