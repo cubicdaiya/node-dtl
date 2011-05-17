@@ -114,6 +114,91 @@ Handle<Value> Dtl::Lcs(const Arguments& args)
     }
 }
 
+Handle<Value> Dtl::Ses(const Arguments& args)
+{
+    HandleScope scope;
+    Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
+
+    string mark_add, mark_del, mark_common;
+    if (args.Length() == 1) {
+        Local<Array> a = Local<Array>::Cast(args[0]);
+        mark_add    = string(*String::Utf8Value(a->Get(String::New("add"))->ToString()));
+        mark_del    = string(*String::Utf8Value(a->Get(String::New("del"))->ToString()));
+        mark_common = string(*String::Utf8Value(a->Get(String::New("common"))->ToString()));
+    } else {
+        mark_add    = string(SES_MARK_ADD);
+        mark_del    = string(SES_MARK_DELETE);
+        mark_common = string(SES_MARK_COMMON);
+    }
+
+    if (dtl->getType() == DtlTypeStringArray) {
+        dtl::Ses< string > ses = dtl->vsdiff->getSes();
+        vector< pair< string, elemInfo > > ses_v = ses.getSequence();
+        Local<Array> ret = Array::New(ses_v.size());
+        for (size_t i=0;i<ses_v.size();++i) {
+            Local<Array> e = Array::New(1);
+            switch (ses_v[i].second.type) {
+            case SES_ADD:
+                e->Set(String::New(mark_add.c_str()), String::New(ses_v[i].first.c_str()));
+                break;
+            case SES_DELETE:
+                e->Set(String::New(mark_del.c_str()), String::New(ses_v[i].first.c_str()));
+                break;
+            case SES_COMMON:
+                e->Set(String::New(mark_common.c_str()), String::New(ses_v[i].first.c_str()));
+                break;
+            }
+            ret->Set(Integer::New(i), e);
+        }
+        return ret;
+    } else if (dtl->getType() == DtlTypeIntArray) {
+        dtl::Ses< int > ses = dtl->vidiff->getSes();
+        vector< pair< int, elemInfo > > ses_v = ses.getSequence();
+        Local<Array> ret = Array::New(ses_v.size());
+        for (size_t i=0;i<ses_v.size();++i) {
+            Local<Array> e = Array::New(1);
+            switch (ses_v[i].second.type) {
+            case SES_ADD:
+                e->Set(String::New(mark_add.c_str()), Integer::New(ses_v[i].first));
+                break;
+            case SES_DELETE:
+                e->Set(String::New(mark_del.c_str()), Integer::New(ses_v[i].first));
+                break;
+            case SES_COMMON:
+                e->Set(String::New(mark_common.c_str()), Integer::New(ses_v[i].first));
+                break;
+            }
+            ret->Set(Integer::New(i), e);
+        }
+        return ret;
+    } else {
+        dtl::Ses< char > ses = dtl->sdiff->getSes();
+        vector< pair< char, elemInfo > > ses_v = ses.getSequence();
+        Local<Array> ret = Array::New(ses_v.size());
+        for (size_t i=0;i<ses_v.size();++i) {
+            Local<Array> e = Array::New(1);
+            char s[2];
+            s[0] = ses_v[i].first;
+            s[1] = '\0';
+            switch (ses_v[i].second.type) {
+            case SES_ADD:
+                e->Set(String::New(mark_add.c_str()), String::New(s));
+                break;
+            case SES_DELETE:
+                e->Set(String::New(mark_del.c_str()), String::New(s));
+                break;
+            case SES_COMMON:
+                e->Set(String::New(mark_common.c_str()), String::New(s));
+                break;
+            }
+            ret->Set(Integer::New(i), e);
+        }
+        return ret;
+    }
+    return Undefined();
+}
+
+
 Handle<Value> Dtl::PrintSes(const Arguments& args)
 {
     HandleScope scope;

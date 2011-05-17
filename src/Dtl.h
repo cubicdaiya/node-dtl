@@ -39,6 +39,7 @@ public:
     static Handle<Value> ComposeUnifiedHunks(const Arguments& args);
     static Handle<Value> Editdistance(const Arguments& args);
     static Handle<Value> Lcs(const Arguments& args);
+    static Handle<Value> Ses(const Arguments& args);
     static Handle<Value> PrintSes(const Arguments& args);
     static Handle<Value> PrintUnifiedFormat(const Arguments& args);
     void setType(enum arg_type_t type);
