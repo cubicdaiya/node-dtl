@@ -1,3 +1,9 @@
+2011-05-20 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* add function sesString and uniHunksString
+
+	* 0.0.5 released.
+
 2011-05-18 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
 	* add function lcs and ses
