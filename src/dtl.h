@@ -48,6 +48,8 @@ enum op_t {
     DtlOperandCompose,
     DtlOperandComposeUnifiedHunks,
     DtlOperandEditdistrance,
+    DtlOperandSesString,
+    DtlOperandUniHunksString,
     DtlOperandPrintSes,
     DtlOperandPrintUnifiedFormat,
     DtlOperandMerge,

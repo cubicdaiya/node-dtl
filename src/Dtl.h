@@ -31,7 +31,8 @@ public:
     
     ~Dtl()
     {
-        run(DtlOperandDestruct);
+        HandleScope scope;
+        run(DtlOperandDestruct, scope);
     }
 
     static Handle<Value> New(const Arguments& args);
@@ -40,16 +41,18 @@ public:
     static Handle<Value> Editdistance(const Arguments& args);
     static Handle<Value> Lcs(const Arguments& args);
     static Handle<Value> Ses(const Arguments& args);
+    static Handle<Value> SesString(const Arguments& args);
+    static Handle<Value> UniHunksString(const Arguments& args);
     static Handle<Value> PrintSes(const Arguments& args);
     static Handle<Value> PrintUnifiedFormat(const Arguments& args);
     void setType(enum arg_type_t type);
     enum arg_type_t getType();
-    void run(enum op_t);
+    Handle<Value> run(enum op_t, HandleScope& scope);
 private:
-    enum arg_type_t type;
     dtl::Diff<char,    string>  *sdiff;
     dtl::Diff<string,  strVec > *vsdiff;
     dtl::Diff<int,     intVec > *vidiff;
+    enum arg_type_t type;
 };
 
 #endif // NODE_DTL_CLASS_H

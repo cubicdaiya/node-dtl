@@ -1,6 +1,10 @@
 
 #include "Dtl.h"
 
+#include <sstream>
+
+using std::stringstream;
+
 Handle<Value> Dtl::New(const Arguments& args)
 {
     HandleScope scope;
@@ -62,15 +66,14 @@ Handle<Value> Dtl::Compose(const Arguments& args)
 {
     HandleScope scope;
     Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
-    dtl->run(DtlOperandCompose);
-    return Undefined();
+    return dtl->run(DtlOperandCompose, scope);
 }
 
 Handle<Value> Dtl::ComposeUnifiedHunks(const Arguments& args)
 {
     HandleScope scope;
     Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
-    dtl->run(DtlOperandComposeUnifiedHunks);
+    dtl->run(DtlOperandComposeUnifiedHunks, scope);
     return Undefined();
 }
 
@@ -198,21 +201,32 @@ Handle<Value> Dtl::Ses(const Arguments& args)
     return Undefined();
 }
 
+Handle<Value> Dtl::SesString(const Arguments& args)
+{
+    HandleScope scope;
+    Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
+    return dtl->run(DtlOperandSesString, scope);
+}
+
+Handle<Value> Dtl::UniHunksString(const Arguments& args)
+{
+    HandleScope scope;
+    Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
+    return dtl->run(DtlOperandUniHunksString, scope);
+}
 
 Handle<Value> Dtl::PrintSes(const Arguments& args)
 {
     HandleScope scope;
     Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
-    dtl->run(DtlOperandPrintSes);
-    return Undefined();
+    return dtl->run(DtlOperandPrintSes, scope);
 }
 
 Handle<Value> Dtl::PrintUnifiedFormat(const Arguments& args)
 {
     HandleScope scope;
     Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
-    dtl->run(DtlOperandPrintUnifiedFormat);
-    return Undefined();
+    return dtl->run(DtlOperandPrintUnifiedFormat, scope);
 }
 
 void Dtl::setType(enum arg_type_t t)
@@ -225,7 +239,7 @@ enum arg_type_t Dtl::getType()
     return type;
 }
 
-void Dtl::run(enum op_t op)
+Handle<Value> Dtl::run(enum op_t op, HandleScope & scope)
 {
     switch (op) {
     case DtlOperandCompose:
@@ -244,6 +258,32 @@ void Dtl::run(enum op_t op)
             vidiff->composeUnifiedHunks();
         } else {
             sdiff->composeUnifiedHunks();
+        }
+        break;
+    case DtlOperandSesString:
+        {
+            stringstream os;
+            if  (getType() == DtlTypeStringArray) {
+                vsdiff->printSES< stringstream >(os);
+            } else if (getType() == DtlTypeIntArray) {
+                vidiff->printSES< stringstream >(os);
+            } else {
+                sdiff->printSES< stringstream >(os);
+            }
+            return scope.Close(String::New(os.str().c_str()));
+        }
+        break;
+    case DtlOperandUniHunksString:
+        {
+            stringstream os;
+            if (getType() == DtlTypeStringArray) {
+                vsdiff->printUnifiedFormat< stringstream >(os);
+            } else if (getType() == DtlTypeIntArray) {
+                vidiff->printUnifiedFormat< stringstream >(os);
+            } else {
+                sdiff->printUnifiedFormat< stringstream >(os);
+            }
+            return scope.Close(String::New(os.str().c_str()));
         }
         break;
     case DtlOperandPrintSes:
@@ -276,4 +316,5 @@ void Dtl::run(enum op_t op)
     default :
         break;
     }
+    return Undefined();
 }
