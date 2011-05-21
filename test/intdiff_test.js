@@ -13,10 +13,19 @@ var correct_ses = [
     { '+' : 5 } 
 ];
 
-exports['intdiff'] = 
+exports['editdistance'] = 
     function (test) {
         test.equal(diff.editdistance(), 2);
+	test.done();
+    };
+exports['lcs'] = 
+    function (test) {
         test.deepEqual(diff.lcs(), correct_lcs);
+	test.done();
+    };
+
+exports['ses'] = 
+    function (test) {
         test.deepEqual(correct_ses, diff.ses());
-        test.done();
+	test.done();
     };
