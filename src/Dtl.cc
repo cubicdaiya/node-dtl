@@ -139,7 +139,7 @@ Handle<Value> Dtl::Ses(const Arguments& args)
         vector< pair< string, elemInfo > > ses_v = ses.getSequence();
         Local<Array> ret = Array::New(ses_v.size());
         for (size_t i=0;i<ses_v.size();++i) {
-            Local<Array> e = Array::New(1);
+            Local<Object> e = Object::New();
             switch (ses_v[i].second.type) {
             case SES_ADD:
                 e->Set(String::New(mark_add.c_str()), String::New(ses_v[i].first.c_str()));
@@ -159,7 +159,7 @@ Handle<Value> Dtl::Ses(const Arguments& args)
         vector< pair< int, elemInfo > > ses_v = ses.getSequence();
         Local<Array> ret = Array::New(ses_v.size());
         for (size_t i=0;i<ses_v.size();++i) {
-            Local<Array> e = Array::New(1);
+            Local<Object> e = Object::New();
             switch (ses_v[i].second.type) {
             case SES_ADD:
                 e->Set(String::New(mark_add.c_str()), Integer::New(ses_v[i].first));
@@ -179,7 +179,7 @@ Handle<Value> Dtl::Ses(const Arguments& args)
         vector< pair< char, elemInfo > > ses_v = ses.getSequence();
         Local<Array> ret = Array::New(ses_v.size());
         for (size_t i=0;i<ses_v.size();++i) {
-            Local<Array> e = Array::New(1);
+            Local<Object> e = Object::New();
             char s[2];
             s[0] = ses_v[i].first;
             s[1] = '\0';
