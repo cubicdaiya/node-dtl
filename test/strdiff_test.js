@@ -20,7 +20,7 @@ exports['editdistance'] =
     };
 exports['lcs'] = 
     function (test) {
-        test.deepEqual(diff.lcs(), correct_lcs);
+        test.equal(diff.lcs(), correct_lcs);
 	test.done();
     };
 
