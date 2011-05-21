@@ -14,9 +14,9 @@ var correct_ses = [
 ];
 
 exports['intdiff'] = 
-	function (test) {
-            test.equal(diff.editdistance(), 2);
-	    test.deepEqual(diff.lcs(), correct_lcs);
-	    test.deepEqual(correct_ses, diff.ses());
-            test.done();
-	};
+    function (test) {
+        test.equal(diff.editdistance(), 2);
+        test.deepEqual(diff.lcs(), correct_lcs);
+        test.deepEqual(correct_ses, diff.ses());
+        test.done();
+    };

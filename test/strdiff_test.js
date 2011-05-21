@@ -12,9 +12,9 @@ var correct_ses = [
 ];
 
 exports['strdiff'] = 
-	function (test) {
-            test.equal(diff.editdistance(), 2);
-	    test.equal(diff.lcs(), "ab");
-	    test.deepEqual(correct_ses, diff.ses());
-            test.done();
-	};
+    function (test) {
+        test.equal(diff.editdistance(), 2);
+        test.equal(diff.lcs(), "ab");
+        test.deepEqual(correct_ses, diff.ses());
+        test.done();
+    };
