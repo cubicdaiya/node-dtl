@@ -1,5 +1,5 @@
 { "name"       : "dtl",
-  "version"    : "0.0.5",
+  "version"    : "0.0.6",
   "author"     : "Tatsuhiko Kubo <cubicdaiya@gmail.com>",
   "description": "A diff template library binding for node.js",
   "scripts"    : { "install": "node-waf configure build" },

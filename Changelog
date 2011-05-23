@@ -1,3 +1,11 @@
+2011-05-23 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* changed data structure of ses
+
+	* add unit tests
+
+	* 0.0.6 released.
+
 2011-05-20 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
 	* add function sesString and uniHunksString
