@@ -1,4 +1,5 @@
 import Options
+import Utils
 import os
 
 srcdir  = '.'
@@ -19,6 +20,10 @@ def build(bld):
   obj.source   = bld.glob('src/*.cc')
   obj.includes = [dtldir + '/dtl']
   obj.cxxflags = ['-O2', '-g', '-Wall']
+
+def test(tst):
+  test_binary = 'nodeunit'
+  Utils.exec_command(test_binary + ' test')
  
 def shutdown():
   if Options.commands['clean']:
