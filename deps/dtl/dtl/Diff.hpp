@@ -1,5 +1,5 @@
 /**
-   dtl-1.13 -- Diff Template Library
+   dtl-1.15 -- Diff Template Library
    
    In short, Diff Template Library is distributed under so called "BSD license",
    
@@ -324,7 +324,6 @@ namespace dtl {
             long long          length = distance(ses_v.begin(), ses_v.end());
             long long          middle = 0;
             bool               isMiddle, isAfter;
-            elem               e;
             elemInfo           einfo;
             long long          a, b, c, d;        // @@ -a,b +c,d @@
             long long          inc_dec_count = 0;
@@ -336,7 +335,6 @@ namespace dtl {
             a = b = c = d = 0;
             
             for (sesElemVec_iter it=ses_v.begin();it!=ses_v.end();++it, ++l_cnt) {
-                e = it->first;
                 einfo = it->second;
                 switch (einfo.type) {
                 case SES_ADD :

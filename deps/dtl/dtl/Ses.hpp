@@ -1,5 +1,5 @@
 /**
-   dtl-1.13 -- Diff Template Library
+   dtl-1.15 -- Diff Template Library
    
    In short, Diff Template Library is distributed under so called "BSD license",
    
@@ -67,7 +67,7 @@ namespace dtl {
         }
         
         bool isOnlyOneOperation () const {
-            return isOnlyAdd() || isOnlyAdd() || isOnlyCopy();
+            return isOnlyAdd() || isOnlyDelete() || isOnlyCopy();
         }
         
         bool isChange () const {
