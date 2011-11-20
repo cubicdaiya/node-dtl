@@ -208,6 +208,207 @@ Handle<Value> Dtl::SesString(const Arguments& args)
     return dtl->run(DtlOperandSesString, scope);
 }
 
+Handle<Value> Dtl::UniHunks(const Arguments& args)
+{
+    HandleScope scope;
+    Dtl *dtl = ObjectWrap::Unwrap<Dtl>(args.This());
+
+    string mark_add, mark_del, mark_common;
+    if (args.Length() == 1) {
+        Local<Array> a = Local<Array>::Cast(args[0]);
+        mark_add    = string(*String::Utf8Value(a->Get(String::New("add"))->ToString()));
+        mark_del    = string(*String::Utf8Value(a->Get(String::New("del"))->ToString()));
+        mark_common = string(*String::Utf8Value(a->Get(String::New("common"))->ToString()));
+    } else {
+        mark_add    = string(SES_MARK_ADD);
+        mark_del    = string(SES_MARK_DELETE);
+        mark_common = string(SES_MARK_COMMON);
+    }
+
+    if (dtl->getType() == DtlTypeStringArray) {
+        typedef pair< string, elemInfo > sesElem;
+        typedef vector< uniHunk< sesElem > > uniHunkVec;
+        uniHunkVec   unihunks = dtl->vsdiff->getUniHunks();
+        size_t       vsize    = unihunks.size();
+        Local<Array> ret      = Array::New(vsize);
+        for (size_t i=0;i<vsize;++i) {
+            Local<Object> hunk = Object::New();
+            hunk->Set(String::New("a"), Integer::New(unihunks[i].a));
+            hunk->Set(String::New("b"), Integer::New(unihunks[i].b));
+            hunk->Set(String::New("c"), Integer::New(unihunks[i].c));
+            hunk->Set(String::New("d"), Integer::New(unihunks[i].d));
+            
+            size_t c0size = unihunks[i].common[0].size();
+            size_t csize  = unihunks[i].change.size();
+            size_t c1size = unihunks[i].common[1].size();
+            Local<Array> c0, c, c1;
+            c0 = Array::New(c0size);
+            c  = Array::New(csize);
+            c1 = Array::New(c1size);
+
+            for (size_t j=0;j<c0size;++j) {
+                Local<Object> e = Object::New();
+                string s(unihunks[i].common[0][j].first);
+                e->Set(String::New(mark_common.c_str()), String::New(s.c_str()));
+                c0->Set(Integer::New(j), e);
+            }
+
+            for (size_t j=0;j<csize;++j) {
+                Local<Object> e = Object::New();
+                string s(unihunks[i].change[j].first);
+                switch (unihunks[i].change[j].second.type) {
+                case SES_ADD:
+                    e->Set(String::New(mark_add.c_str()), String::New(s.c_str()));
+                    break;
+                case SES_DELETE:
+                    e->Set(String::New(mark_del.c_str()), String::New(s.c_str()));
+                    break;
+                case SES_COMMON:
+                    e->Set(String::New(mark_common.c_str()), String::New(s.c_str()));
+                    break;
+                }
+                c->Set(Integer::New(j), e);
+            }
+            
+            for (size_t j=0;j<c1size;++j) {
+                Local<Object> e = Object::New();
+                string s(unihunks[i].common[1][j].first);
+                e->Set(String::New(mark_common.c_str()), String::New(s.c_str()));
+                c0->Set(Integer::New(j), e);
+            }
+
+            hunk->Set(String::New("common_prev"),  c0);
+            hunk->Set(String::New("change"),       c);
+            hunk->Set(String::New("common_after"), c1);
+
+            ret->Set(Integer::New(i), hunk);
+        }
+        return ret;
+    } else if (dtl->getType() == DtlTypeIntArray) {
+        typedef pair< int, elemInfo > sesElem;
+        typedef vector< uniHunk< sesElem > > uniHunkVec;
+        uniHunkVec   unihunks = dtl->vidiff->getUniHunks();
+        size_t       vsize    = unihunks.size();
+        Local<Array> ret      = Array::New(vsize);
+        for (size_t i=0;i<vsize;++i) {
+            Local<Object> hunk = Object::New();
+            hunk->Set(String::New("a"), Integer::New(unihunks[i].a));
+            hunk->Set(String::New("b"), Integer::New(unihunks[i].b));
+            hunk->Set(String::New("c"), Integer::New(unihunks[i].c));
+            hunk->Set(String::New("d"), Integer::New(unihunks[i].d));
+            
+            size_t c0size = unihunks[i].common[0].size();
+            size_t csize  = unihunks[i].change.size();
+            size_t c1size = unihunks[i].common[1].size();
+            Local<Array> c0, c, c1;
+            c0 = Array::New(c0size);
+            c  = Array::New(csize);
+            c1 = Array::New(c1size);
+
+            for (size_t j=0;j<c0size;++j) {
+                Local<Object> e = Object::New();
+                e->Set(String::New(mark_common.c_str()), Integer::New(unihunks[i].common[0][j].first));
+                c0->Set(Integer::New(j), e);
+            }
+
+            for (size_t j=0;j<csize;++j) {
+                Local<Object> e = Object::New();
+                switch (unihunks[i].change[j].second.type) {
+                case SES_ADD:
+                    e->Set(String::New(mark_add.c_str()), Integer::New(unihunks[i].change[j].first));
+                    break;
+                case SES_DELETE:
+                    e->Set(String::New(mark_del.c_str()), Integer::New(unihunks[i].change[j].first));
+                    break;
+                case SES_COMMON:
+                    e->Set(String::New(mark_common.c_str()), Integer::New(unihunks[i].change[j].first));
+                    break;
+                }
+                c->Set(Integer::New(j), e);
+            }
+            
+            for (size_t j=0;j<c1size;++j) {
+                Local<Object> e = Object::New();
+                e->Set(String::New(mark_common.c_str()), Integer::New(unihunks[i].common[1][j].first));
+                c0->Set(Integer::New(j), e);
+            }
+
+            hunk->Set(String::New("common_prev"),  c0);
+            hunk->Set(String::New("change"),       c);
+            hunk->Set(String::New("common_after"), c1);
+
+            ret->Set(Integer::New(i), hunk);
+        }
+        return ret;
+    } else {
+        typedef pair< char, elemInfo > sesElem;
+        typedef vector< uniHunk< sesElem > > uniHunkVec;
+        uniHunkVec   unihunks = dtl->sdiff->getUniHunks();
+        size_t       vsize    = unihunks.size();
+        Local<Array> ret      = Array::New(vsize);
+        for (size_t i=0;i<vsize;++i) {
+            Local<Object> hunk = Object::New();
+            hunk->Set(String::New("a"), Integer::New(unihunks[i].a));
+            hunk->Set(String::New("b"), Integer::New(unihunks[i].b));
+            hunk->Set(String::New("c"), Integer::New(unihunks[i].c));
+            hunk->Set(String::New("d"), Integer::New(unihunks[i].d));
+            
+            size_t c0size = unihunks[i].common[0].size();
+            size_t csize  = unihunks[i].change.size();
+            size_t c1size = unihunks[i].common[1].size();
+            Local<Array> c0, c, c1;
+            c0 = Array::New(c0size);
+            c  = Array::New(csize);
+            c1 = Array::New(c1size);
+
+            for (size_t j=0;j<c0size;++j) {
+                Local<Object> e = Object::New();
+                char s[2];
+                s[0] = unihunks[i].common[0][j].first;
+                s[1] = '\0';
+                e->Set(String::New(mark_common.c_str()), String::New(s));
+                c0->Set(Integer::New(j), e);
+            }
+
+            for (size_t j=0;j<csize;++j) {
+                Local<Object> e = Object::New();
+                char s[2];
+                s[0] = unihunks[i].change[j].first;
+                s[1] = '\0';
+                switch (unihunks[i].change[j].second.type) {
+                case SES_ADD:
+                    e->Set(String::New(mark_add.c_str()), String::New(s));
+                    break;
+                case SES_DELETE:
+                    e->Set(String::New(mark_del.c_str()), String::New(s));
+                    break;
+                case SES_COMMON:
+                    e->Set(String::New(mark_common.c_str()), String::New(s));
+                    break;
+                }
+                c->Set(Integer::New(j), e);
+            }
+            
+            for (size_t j=0;j<c1size;++j) {
+                Local<Object> e = Object::New();
+                char s[2];
+                s[0] = unihunks[i].common[1][j].first;
+                s[1] = '\0';
+                e->Set(String::New(mark_common.c_str()), String::New(s));
+                c0->Set(Integer::New(j), e);
+            }
+
+            hunk->Set(String::New("common_prev"),  c0);
+            hunk->Set(String::New("change"),       c);
+            hunk->Set(String::New("common_after"), c1);
+
+            ret->Set(Integer::New(i), hunk);
+        }
+        return ret;
+    }
+    return Undefined();
+}
+
 Handle<Value> Dtl::UniHunksString(const Arguments& args)
 {
     HandleScope scope;

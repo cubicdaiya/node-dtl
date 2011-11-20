@@ -42,6 +42,7 @@ public:
     static Handle<Value> Lcs(const Arguments& args);
     static Handle<Value> Ses(const Arguments& args);
     static Handle<Value> SesString(const Arguments& args);
+    static Handle<Value> UniHunks(const Arguments& args);
     static Handle<Value> UniHunksString(const Arguments& args);
     static Handle<Value> PrintSes(const Arguments& args);
     static Handle<Value> PrintUnifiedFormat(const Arguments& args);

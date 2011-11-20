@@ -19,6 +19,7 @@ using dtl::elemInfo;
 using dtl::SES_ADD;
 using dtl::SES_COMMON;
 using dtl::SES_DELETE;
+using dtl::uniHunk;
 
 //using namespace v8;
 using v8::Handle;

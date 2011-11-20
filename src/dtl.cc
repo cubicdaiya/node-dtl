@@ -19,6 +19,7 @@ init (Handle<Object> target)
     NODE_SET_PROTOTYPE_METHOD(t_diff, "lcs",                 Dtl::Lcs);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "ses",                 Dtl::Ses);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "sesString",           Dtl::SesString);
+    NODE_SET_PROTOTYPE_METHOD(t_diff, "uniHunks",            Dtl::UniHunks);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "uniHunksString",      Dtl::UniHunksString);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "printSES",            Dtl::PrintSes);
     NODE_SET_PROTOTYPE_METHOD(t_diff, "printUnifiedFormat",  Dtl::PrintUnifiedFormat);
