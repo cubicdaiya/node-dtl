@@ -15,6 +15,26 @@ var correct_ses = [
     { '+' : 'bokko' },
 ];
 
+var correct_unihunks = [
+    {
+        a: 1,
+        b: 3,
+        c: 1,
+        d: 3,
+        common_prev: [ 
+            { ' ': 'bokko'  }, 
+            { ' ': 'bokkko' }
+        ],
+        change: [ 
+            { '-': 'bokkkko' }, 
+            { '+': 'bokko'   }
+        ],
+        common_after: [
+
+        ]
+    }
+];
+
 exports['editdistance'] = 
     function (test) {
         test.equal(diff.editdistance(), 2);
@@ -30,4 +50,10 @@ exports['ses'] =
     function (test) {
         test.deepEqual(correct_ses, diff.ses());
 	test.done();
+    };
+
+exports['unihunks'] = 
+    function (test) {
+        test.deepEqual(correct_unihunks, diff.uniHunks());
+    test.done();
     };

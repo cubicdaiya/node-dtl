@@ -13,19 +13,45 @@ var correct_ses = [
     { '+' : 'd' } 
 ];
 
+var correct_unihunks = [
+    {
+        a: 1,
+        b: 3,
+        c: 1,
+        d: 3,
+        common_prev: [ 
+            { ' ': 'a' }, 
+            { ' ': 'b' }
+        ],
+        change: [ 
+            { '-': 'c' }, 
+            { '+': 'd' }
+        ],
+        common_after: [
+        ]
+    }
+]
+
 exports['editdistance'] = 
     function (test) {
         test.equal(diff.editdistance(), 2);
-	test.done();
+    test.done();
     };
+
 exports['lcs'] = 
     function (test) {
         test.equal(diff.lcs(), correct_lcs);
-	test.done();
+    test.done();
     };
 
 exports['ses'] = 
     function (test) {
         test.deepEqual(correct_ses, diff.ses());
-	test.done();
+    test.done();
+    };
+
+exports['unihunks'] = 
+    function (test) {
+        test.deepEqual(correct_unihunks, diff.uniHunks());
+    test.done();
     };

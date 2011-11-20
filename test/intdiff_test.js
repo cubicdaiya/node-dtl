@@ -13,6 +13,26 @@ var correct_ses = [
     { '+' : 5 } 
 ];
 
+var correct_unihunks = [
+    {
+        a: 1,
+        b: 3,
+        c: 1,
+        d: 3,
+        common_prev: [ 
+            { ' ': 1 }, 
+            { ' ': 2 }
+        ],
+        change: [ 
+            { '-': 3 },
+            { '+': 5 }
+        ],
+        common_after: [
+
+        ] 
+    }
+];
+
 exports['editdistance'] = 
     function (test) {
         test.equal(diff.editdistance(), 2);
@@ -28,4 +48,10 @@ exports['ses'] =
     function (test) {
         test.deepEqual(correct_ses, diff.ses());
 	test.done();
+    };
+
+exports['unihunks'] = 
+    function (test) {
+        test.deepEqual(correct_unihunks, diff.uniHunks());
+    test.done();
     };
