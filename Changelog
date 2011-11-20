@@ -1,3 +1,11 @@
+2011-11-20 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* add function of uniHunk
+
+	* update dtl v1.13 -> v1.15
+
+	* 0.0.7 released.
+
 2011-05-23 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
 	* changed data structure of ses
