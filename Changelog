@@ -1,3 +1,9 @@
+2011-11-22 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* modify unihunk structure
+
+	* 0.0.8 released.
+
 2011-11-20 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
 	* add function of uniHunk
