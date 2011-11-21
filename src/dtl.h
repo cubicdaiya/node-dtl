@@ -21,7 +21,6 @@ using dtl::SES_COMMON;
 using dtl::SES_DELETE;
 using dtl::uniHunk;
 
-//using namespace v8;
 using v8::Handle;
 using v8::HandleScope;
 using v8::Local;
