@@ -19,15 +19,11 @@ var correct_unihunks = [
         b: 3,
         c: 1,
         d: 3,
-        common_prev: [ 
+        diff: [ 
             { ' ': 'a' }, 
-            { ' ': 'b' }
-        ],
-        change: [ 
+            { ' ': 'b' },
             { '-': 'c' }, 
             { '+': 'd' }
-        ],
-        common_after: [
         ]
     }
 ]

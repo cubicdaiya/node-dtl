@@ -241,16 +241,15 @@ Handle<Value> Dtl::UniHunks(const Arguments& args)
             size_t c0size = unihunks[i].common[0].size();
             size_t csize  = unihunks[i].change.size();
             size_t c1size = unihunks[i].common[1].size();
-            Local<Array> c0, c, c1;
-            c0 = Array::New(c0size);
-            c  = Array::New(csize);
-            c1 = Array::New(c1size);
+            size_t idx    = 0;
+            Local<Array> c;
+            c = Array::New(c0size + csize + c1size);
 
             for (size_t j=0;j<c0size;++j) {
                 Local<Object> e = Object::New();
                 string s(unihunks[i].common[0][j].first);
                 e->Set(String::New(mark_common.c_str()), String::New(s.c_str()));
-                c0->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
 
             for (size_t j=0;j<csize;++j) {
@@ -267,20 +266,17 @@ Handle<Value> Dtl::UniHunks(const Arguments& args)
                     e->Set(String::New(mark_common.c_str()), String::New(s.c_str()));
                     break;
                 }
-                c->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
             
             for (size_t j=0;j<c1size;++j) {
                 Local<Object> e = Object::New();
                 string s(unihunks[i].common[1][j].first);
                 e->Set(String::New(mark_common.c_str()), String::New(s.c_str()));
-                c0->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
 
-            hunk->Set(String::New("common_prev"),  c0);
-            hunk->Set(String::New("change"),       c);
-            hunk->Set(String::New("common_after"), c1);
-
+            hunk->Set(String::New("diff"), c);
             ret->Set(Integer::New(i), hunk);
         }
         return ret;
@@ -300,15 +296,14 @@ Handle<Value> Dtl::UniHunks(const Arguments& args)
             size_t c0size = unihunks[i].common[0].size();
             size_t csize  = unihunks[i].change.size();
             size_t c1size = unihunks[i].common[1].size();
-            Local<Array> c0, c, c1;
-            c0 = Array::New(c0size);
-            c  = Array::New(csize);
-            c1 = Array::New(c1size);
+            size_t idx    = 0;
+            Local<Array> c;
+            c = Array::New(c0size + csize + c1size);
 
             for (size_t j=0;j<c0size;++j) {
                 Local<Object> e = Object::New();
                 e->Set(String::New(mark_common.c_str()), Integer::New(unihunks[i].common[0][j].first));
-                c0->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
 
             for (size_t j=0;j<csize;++j) {
@@ -324,19 +319,16 @@ Handle<Value> Dtl::UniHunks(const Arguments& args)
                     e->Set(String::New(mark_common.c_str()), Integer::New(unihunks[i].change[j].first));
                     break;
                 }
-                c->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
             
             for (size_t j=0;j<c1size;++j) {
                 Local<Object> e = Object::New();
                 e->Set(String::New(mark_common.c_str()), Integer::New(unihunks[i].common[1][j].first));
-                c0->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
 
-            hunk->Set(String::New("common_prev"),  c0);
-            hunk->Set(String::New("change"),       c);
-            hunk->Set(String::New("common_after"), c1);
-
+            hunk->Set(String::New("diff"), c);
             ret->Set(Integer::New(i), hunk);
         }
         return ret;
@@ -356,10 +348,9 @@ Handle<Value> Dtl::UniHunks(const Arguments& args)
             size_t c0size = unihunks[i].common[0].size();
             size_t csize  = unihunks[i].change.size();
             size_t c1size = unihunks[i].common[1].size();
-            Local<Array> c0, c, c1;
-            c0 = Array::New(c0size);
-            c  = Array::New(csize);
-            c1 = Array::New(c1size);
+            size_t idx    = 0;
+            Local<Array> c;
+            c = Array::New(c0size + csize + c1size);
 
             for (size_t j=0;j<c0size;++j) {
                 Local<Object> e = Object::New();
@@ -367,7 +358,7 @@ Handle<Value> Dtl::UniHunks(const Arguments& args)
                 s[0] = unihunks[i].common[0][j].first;
                 s[1] = '\0';
                 e->Set(String::New(mark_common.c_str()), String::New(s));
-                c0->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
 
             for (size_t j=0;j<csize;++j) {
@@ -386,7 +377,7 @@ Handle<Value> Dtl::UniHunks(const Arguments& args)
                     e->Set(String::New(mark_common.c_str()), String::New(s));
                     break;
                 }
-                c->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
             
             for (size_t j=0;j<c1size;++j) {
@@ -395,13 +386,10 @@ Handle<Value> Dtl::UniHunks(const Arguments& args)
                 s[0] = unihunks[i].common[1][j].first;
                 s[1] = '\0';
                 e->Set(String::New(mark_common.c_str()), String::New(s));
-                c0->Set(Integer::New(j), e);
+                c->Set(Integer::New(idx++), e);
             }
 
-            hunk->Set(String::New("common_prev"),  c0);
-            hunk->Set(String::New("change"),       c);
-            hunk->Set(String::New("common_after"), c1);
-
+            hunk->Set(String::New("diff"), c);
             ret->Set(Integer::New(i), hunk);
         }
         return ret;

@@ -21,16 +21,11 @@ var correct_unihunks = [
         b: 3,
         c: 1,
         d: 3,
-        common_prev: [ 
-            { ' ': 'bokko'  }, 
-            { ' ': 'bokkko' }
-        ],
-        change: [ 
+        diff: [ 
+            { ' ': 'bokko'   }, 
+            { ' ': 'bokkko'  },
             { '-': 'bokkkko' }, 
             { '+': 'bokko'   }
-        ],
-        common_after: [
-
         ]
     }
 ];
