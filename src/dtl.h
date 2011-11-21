@@ -1,5 +1,5 @@
-#ifndef NODE_DTLA
-#define NODE_DTLA
+#ifndef NODE_DTL
+#define NODE_DTL
 
 #include <v8.h>
 #include <node.h>
