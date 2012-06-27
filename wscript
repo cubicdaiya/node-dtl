@@ -32,3 +32,5 @@ def shutdown():
   else:
     if os.path.exists('build/default/dtl.node') and not os.path.lexists('dtl.node'):
       os.symlink('build/default/dtl.node', 'dtl.node')
+    if os.path.exists('build/Release/dtl.node') and not os.path.lexists('dtl.node'):
+      os.symlink('build/Release/dtl.node', 'dtl.node')
