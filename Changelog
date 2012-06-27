@@ -1,3 +1,9 @@
+2012-06-28 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* fixed problem(fail to require 'dtl')
+
+	* 0.1.0 released.
+
 2012-03-23 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
 	* fixed typo

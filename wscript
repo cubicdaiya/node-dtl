@@ -5,7 +5,7 @@ import os
 srcdir  = '.'
 blddir  = 'build'
 dtldir  = os.path.abspath(srcdir) + "/deps/dtl"
-VERSION = '0.0.6'
+VERSION = '0.1.0'
 
 def set_options(opt):
   opt.tool_options('compiler_cxx')
