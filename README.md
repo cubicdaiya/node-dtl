@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/cubicdaiya/node-dtl.png)](http://travis-ci.org/cubicdaiya/node-dtl)
 Summary
 ===========
 
