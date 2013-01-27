@@ -1,3 +1,11 @@
+2013-01-27 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+
+	* replace waf with gyp
+
+	* fix compile error in Mac OS X
+
+	* 0.2.0 released.
+
 2012-06-28 Tatsuhiko Kubo <cubicdaiya@gmail.com>
 
 	* fixed problem(fail to require 'dtl')
