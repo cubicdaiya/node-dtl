@@ -2,8 +2,8 @@
 #include <string>
 
 #include "dtl.h"
-#include "Dtl.h"
-#include "Dtl3.h"
+#include "Diff.h"
+#include "Diff3.h"
 
 extern "C" void
 init (Handle<Object> target)
