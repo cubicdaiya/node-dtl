@@ -44,6 +44,8 @@ protected :
             string path_rses   = create_path(test_name, diff_name, TYPE_DIFF_SES, true);
             string path_lhunks = create_path(test_name, diff_name, TYPE_DIFF_UNI);
             string path_rhunks = create_path(test_name, diff_name, TYPE_DIFF_UNI, true);
+            diff_resultset_exist_check(path_lses);
+            diff_resultset_exist_check(path_lhunks);
             
             create_file< elem, sequence, comparator >(path_rses,   diff, TYPE_DIFF_SES);
             create_file< elem, sequence, comparator >(path_rhunks, diff, TYPE_DIFF_UNI);
@@ -289,7 +291,7 @@ TEST_F (Strdifftest, only_editdis_test8) {
 TEST_F (Strdifftest, custom_comparator_test0) {
     EXPECT_EQ(0,     custom_cases[0].editdis);
     
-    EXPECT_EQ("Abc", custom_cases[0].lcs_s);
+    EXPECT_EQ("abc", custom_cases[0].lcs_s);
 
     ASSERT_EQ(0,     custom_cases[0].editdis_ses);
     

@@ -1,9 +1,9 @@
 /**
-   dtl-1.15 -- Diff Template Library
+   dtl -- Diff Template Library
    
    In short, Diff Template Library is distributed under so called "BSD license",
    
-   Copyright (c) 2008-2011 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+   Copyright (c) 2013 Tatsuhiko Kubo <cubicdaiya@gmail.com>
    All rights reserved.
    
    Redistribution and use in source and binary forms, with or without modification,
@@ -96,7 +96,7 @@ namespace dtl {
     };
     
     /**
-     * unfiend format element printer class template
+     * unified format element printer class template
      */
     template <typename sesElem, typename stream = ostream >
     class UniHunkPrinter

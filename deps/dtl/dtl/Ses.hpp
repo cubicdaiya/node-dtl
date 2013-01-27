@@ -1,9 +1,9 @@
 /**
-   dtl-1.15 -- Diff Template Library
+   dtl -- Diff Template Library
    
    In short, Diff Template Library is distributed under so called "BSD license",
    
-   Copyright (c) 2008-2011 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+   Copyright (c) 2013 Tatsuhiko Kubo <cubicdaiya@gmail.com>
    All rights reserved.
    
    Redistribution and use in source and binary forms, with or without modification,
@@ -51,7 +51,12 @@ namespace dtl {
         typedef vector< sesElem >      sesElemVec;
     public :
         
-        Ses () : onlyAdd(true), onlyDelete(true), onlyCopy(true) { }
+        Ses () : onlyAdd(true), onlyDelete(true), onlyCopy(true), deletesFirst(false) {
+            nextDeleteIdx = 0;
+        }
+        Ses (bool moveDel) : onlyAdd(true), onlyDelete(true), onlyCopy(true), deletesFirst(moveDel) {
+            nextDeleteIdx = 0;
+        }
         ~Ses () {}
         
         bool isOnlyAdd () const {
@@ -81,19 +86,32 @@ namespace dtl {
             info.afterIdx  = afterIdx;
             info.type      = type;
             sesElem pe(e, info);
-            sequence.push_back(pe);
+            if (!deletesFirst) {
+                sequence.push_back(pe);
+            }
             switch (type) {
             case SES_DELETE:
                 onlyCopy   = false;
                 onlyAdd    = false;
+                if (deletesFirst) {
+                    sequence.insert(sequence.begin() + nextDeleteIdx, pe);
+                    nextDeleteIdx++;
+                }
                 break;
             case SES_COMMON:
                 onlyAdd    = false;
                 onlyDelete = false;
+                if (deletesFirst) {
+                    sequence.push_back(pe);
+                    nextDeleteIdx = sequence.size();
+                }
                 break;
             case SES_ADD:
                 onlyDelete = false;
                 onlyCopy   = false;
+                if (deletesFirst) {
+                    sequence.push_back(pe);
+                }
                 break;
             }
         }
@@ -106,6 +124,8 @@ namespace dtl {
         bool       onlyAdd;
         bool       onlyDelete;
         bool       onlyCopy;
+        bool       deletesFirst;
+        size_t     nextDeleteIdx;
     };
 }
 

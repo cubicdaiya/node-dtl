@@ -1,9 +1,9 @@
 /**
-   dtl-1.15 -- Diff Template Library
+   dtl -- Diff Template Library
    
    In short, Diff Template Library is distributed under so called "BSD license",
    
-   Copyright (c) 2008-2011 Tatsuhiko Kubo <cubicdaiya@gmail.com>
+   Copyright (c) 2013 Tatsuhiko Kubo <cubicdaiya@gmail.com>
    All rights reserved.
    
    Redistribution and use in source and binary forms, with or without modification,
@@ -59,7 +59,12 @@ namespace dtl {
     using std::rotate;
     using std::swap;
     using std::max;
-    
+
+    /**
+     * version string
+     */
+    const string version = "1.18";
+
     /**
      * type of edit for SES
      */
@@ -82,6 +87,9 @@ namespace dtl {
         long long beforeIdx;           // index of prev sequence
         long long afterIdx;            // index of after sequence
         edit_t    type;                // type of edit(Add, Delete, Common)
+        bool operator==(const eleminfo& other) const{
+            return (this->beforeIdx == other.beforeIdx && this->afterIdx == other.afterIdx && this->type == other.type);
+        }
     } elemInfo;
     
     const long long DTL_SEPARATE_SIZE = 3;
