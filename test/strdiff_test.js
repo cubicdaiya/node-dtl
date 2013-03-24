@@ -1,5 +1,5 @@
 
-var dtl  = require('dtl');
+var dtl  = require('../dtl');
 var diff = new dtl.Diff("abc", "abd");
 diff.compose();
 diff.composeUnifiedHunks();

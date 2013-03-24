@@ -1,6 +1,8 @@
 Summary
 ===========
 
+[![Build Status](https://travis-ci.org/cubicdaiya/node-dtl.png?branch=master)](https://travis-ci.org/cubicdaiya/node-dtl)
+
 node-dtl is an dtl(diff template library) binding for node.js
 
 Copyright(C) 2011  Tatsuhiko Kubo <cubicdaiya@gmail.com>

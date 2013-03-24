@@ -6,5 +6,8 @@
   "main"       : "./dtl",
   "keywords"   : [ "diff", "diff3", "editdistance", "unified format" ],
   "licenses"   : [ { "type": "BSD", "url": "https://github.com/cubicdaiya/node-dtl/raw/master/COPYING" } ],
-  "repository" : { "type": "git", "url": "https://github.com/cubicdaiya/node-dtl.git" }
+  "repository" : { "type": "git", "url": "https://github.com/cubicdaiya/node-dtl.git" },
+  "scripts": {
+    "test": "nodeunit test"
+  }
 }
